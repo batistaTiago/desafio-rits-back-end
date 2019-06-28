@@ -17,10 +17,10 @@ class Application extends Model
         return $this->belongsTo('App\ApplicationStatus');
     }
 
-    // protected $with = [
-    //     'EnglishLevel:id,nivelIngles', 
-    //     'ApplicationStatus:id,status'
-    // ];
+    protected $with = [
+        'EnglishLevel:id,nivelIngles', 
+        'ApplicationStatus:id,status'
+    ];
 
     protected $hidden = [
         'created_at', 
@@ -33,13 +33,13 @@ class Application extends Model
     public static function getAll() {
         $applications = Application::all();
 
-        foreach ($applications as $a) {
-            $status = ApplicationStatus::find($a->id)->status;
-            $nivelIngles = EnglishLevel::find($a->id)->nivelIngles;
-            $a->nivelIngles = $nivelIngles;
-            $a->status = $status;
-        }
-        
+        // foreach ($applications as $a) {
+        //     $status = ApplicationStatus::find($a->id)->status;
+        //     $nivelIngles = EnglishLevel::find($a->id)->nivelIngles;
+        //     $a->nivelIngles = $nivelIngles;
+        //     $a->status = $status;
+        // }
+
         return $applications;
 
     }
@@ -65,6 +65,7 @@ class Application extends Model
     public static function updateStatus($id, $status)  {
         $application = Application::find($id);
         $application->application_status_id = $status;
+        $application->applicationStatus; // ver se não tem como fazer de um jeito melhor
         $application->save();
         return $application;
     }

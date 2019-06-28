@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Application;
 use Illuminate\Support\Facades\Storage;
+use Log;
 
 class ApplicationController extends Controller
 {
@@ -58,27 +59,26 @@ class ApplicationController extends Controller
         }
     }
 
-    private $validStatuses = ['1', '2', '3', '4'];
+    private $validStatusIds = [1, 2, 3, 4];
 
     public function update($id, Request $req) {
         $this->validate(request(), [
             'status' => 'required'
         ]);
 
-        $status = $req->status;
-
         try {
-            $this->validateStatus($status);
+            $this->validateStatus($req->status);
             $result = Application::updateStatus($id, $req->status);
             return ResponseController::success($result);
         } catch (\Throwable $exc) {
+            Log::info($exc);
             return ResponseController::badRequest();
         }
     }
 
     private function validateStatus($status) {
-        if (!in_array($status, $this->validStatuses)) {
-            throw \Throwable('status invalido');
+        if (!in_array($status, $this->validStatusIds)) {
+            throw new \Exception('status invalido');
         }
     }
 }
