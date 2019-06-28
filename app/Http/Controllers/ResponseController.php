@@ -23,5 +23,13 @@ class ResponseController extends Controller {
     public static function created($data) {
         return response()->json($data, 201);
     }
+
+    public static function echo($data) {
+        return response()->json($data, 204);
+    }
+
+    public static function download($path, $fileName) {
+        return response()->download($path, $fileName);
+    }
     
 }

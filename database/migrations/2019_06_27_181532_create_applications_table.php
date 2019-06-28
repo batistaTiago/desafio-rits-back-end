@@ -20,10 +20,16 @@ class CreateApplicationsTable extends Migration
             $table->string('telefone');
             $table->string('linkedinURL');
             $table->string('githubURL');
-            $table->string('nivelIngles');
             $table->string('pretensaoSalarial');
             $table->string('curriculo');
-            $table->string('status')->default('pendente');
+            $table->string('nomeOriginalArquivo');
+
+            $table->bigInteger('english_level_id')->unsigned();
+            $table->foreign('english_level_id')->references('id')->on('english_levels');
+            
+            $table->bigInteger('application_status_id')->unsigned()->default('1');
+            $table->foreign('application_status_id')->references('id')->on('application_statuses');
+
             $table->timestamps();
         });
     }

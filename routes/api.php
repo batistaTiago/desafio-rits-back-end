@@ -9,3 +9,4 @@ use Illuminate\Http\Request;
 Route::post('/applications', 'ApplicationController@store');
 Route::get('/applications', 'ApplicationController@index');
 Route::put('/applications/{id}', 'ApplicationController@update');
+Route::get('/download/{id}', 'ApplicationController@download');
