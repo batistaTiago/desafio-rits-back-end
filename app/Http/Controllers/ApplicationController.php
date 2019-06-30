@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Application;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ApplicationController extends Controller
 {
@@ -39,6 +40,7 @@ class ApplicationController extends Controller
             $result = Application::create($req);
             return ResponseController::success($result);
         } catch (\Throwable $exc) {
+            Log::info($exc);
             return ResponseController::badRequest();
         }
     }

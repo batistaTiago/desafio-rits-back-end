@@ -50,6 +50,9 @@ class Application extends Model
         $application->pretensaoSalarial = $req->pretensaoSalarial;
         $application->curriculo = $file->store('curriculos', 'public');
         $application->nomeOriginalArquivo = $file->getClientOriginalName();
+
+        $application->coverLetter = $req->coverLetter;
+
         $application->save();
         return $application;
     }
