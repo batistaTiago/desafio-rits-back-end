@@ -79,7 +79,7 @@ class AuthController extends Controller
         return ResponseController::success([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 600
+            // 'expires_in' => auth()->factory()->getTTL() * 6
         ]);
     }
 }
