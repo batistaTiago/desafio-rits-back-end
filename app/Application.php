@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
 
 class Application extends Model
 {
@@ -32,13 +31,6 @@ class Application extends Model
 
     public static function getAll() {
         $applications = Application::all();
-
-        // foreach ($applications as $a) {
-        //     $status = ApplicationStatus::find($a->id)->status;
-        //     $nivelIngles = EnglishLevel::find($a->id)->nivelIngles;
-        //     $a->nivelIngles = $nivelIngles;
-        //     $a->status = $status;
-        // }
 
         return $applications;
 
@@ -71,6 +63,7 @@ class Application extends Model
     }
 
     public static function getByStatus($status) {
-        return Application::where('status', $status)->get();
+        $statusId = ApplicationStatus::where('status', $status)->first()->id;
+        return Application::where('application_status_id', $statusId)->get();
     }
 }

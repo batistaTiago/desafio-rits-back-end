@@ -13,7 +13,7 @@ class ResponseController extends Controller {
     }
 
     public static function unauthorized() {
-        return response()->json(['error' => ['code' => 401, 'message' => 'Não autorizado. Envie um bearer token.']], 401);
+        return response()->json(['error' => ['code' => 401, 'message' => 'Unauthorized']], 401);
     }
 
     public static function success($data) {

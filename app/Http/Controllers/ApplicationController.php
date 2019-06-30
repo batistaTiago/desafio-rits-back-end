@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Application;
 use Illuminate\Support\Facades\Storage;
-use Log;
 
 class ApplicationController extends Controller
 {
 
+    private $validStatusIds = [1, 2, 3, 4];
 
     public function index(Request $req) {
         $status = $req->query('status');
@@ -22,12 +22,7 @@ class ApplicationController extends Controller
         return ResponseController::success($result);
     }
 
-
-
-    public function store(Request $req)
-    {
-
-        \Log::info('recebendo store request');
+    public function store(Request $req) {
 
         $this->validate(request(), [
             'nomeCompleto' => 'required',
@@ -44,7 +39,6 @@ class ApplicationController extends Controller
             $result = Application::create($req);
             return ResponseController::success($result);
         } catch (\Throwable $exc) {
-            \Log::info('erro');
             return ResponseController::badRequest();
         }
     }
@@ -59,8 +53,6 @@ class ApplicationController extends Controller
         }
     }
 
-    private $validStatusIds = [1, 2, 3, 4];
-
     public function update($id, Request $req) {
         $this->validate(request(), [
             'status' => 'required'
@@ -71,7 +63,6 @@ class ApplicationController extends Controller
             $result = Application::updateStatus($id, $req->status);
             return ResponseController::success($result);
         } catch (\Throwable $exc) {
-            Log::info($exc);
             return ResponseController::badRequest();
         }
     }

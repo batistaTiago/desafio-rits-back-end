@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(EnglishLevelSeeder::class);
         $this->call(ApplicationStatusSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }
