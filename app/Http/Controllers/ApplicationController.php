@@ -38,6 +38,7 @@ class ApplicationController extends Controller
 
         try {
             $result = Application::create($req);
+            MailController::sendMail($req);
             return ResponseController::success($result);
         } catch (\Throwable $exc) {
             Log::info($exc);
