@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use App\Mail\ApplicationMailable;
+use App\Mail\DailyNotification;
 
 class MailController extends Controller {
 
@@ -22,8 +23,16 @@ class MailController extends Controller {
             Mail::to($targetMail)->send(new ApplicationMailable($data));
             return ResponseController::success(['data' => 'success']);
         } catch (\Throwable $exc) {
-            return ResponseController::badRequest(['data' => $exc->getMessage()]);
+            return ResponseController::badRequest(['message' => $exc->getMessage()]);
         }
+    }
+
+    public static function notify($count) {
+        $targetMail = env('TARGET_MAIL', 'ekyidag@gmail.com');
+
+        $data = ['count' => 50];
+
+        Mail::to($targetMail)->send(new DailyNotification($data));
     }
 
 }
