@@ -14,7 +14,7 @@ class CoverLetterColumnAddition extends Migration
     public function up()
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->string('coverLetter')->nullable();
+            $table->text('coverLetter')->nullable();
         });
     }
 

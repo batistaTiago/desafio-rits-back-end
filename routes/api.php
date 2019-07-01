@@ -12,4 +12,4 @@ Route::middleware(AuthMiddleware::class)->get('me', 'AuthController@me');
 Route::post('/applications', 'ApplicationController@store');
 Route::middleware(AuthMiddleware::class)->get('/applications', 'ApplicationController@index');
 Route::middleware(AuthMiddleware::class)->put('/applications/{id}', 'ApplicationController@update');
-Route::middleware(AuthMiddleware::class)->get('/download/{id}', 'ApplicationController@download');
+Route::get('/download/{id}', 'ApplicationController@download');
